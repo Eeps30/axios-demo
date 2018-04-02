@@ -1,24 +1,25 @@
 const BASE_URL = 'http://api.reactprototypes.com';
 const API_KEY = '?key=testuser1234';
 
-axios.get(`${BASE_URL}/todos${API_KEY}`).then(resp => {
-    const { todos } = resp.data;
-    const table = $('table tbody');
+// axios.get(`${BASE_URL}/todos${API_KEY}`).then(resp => {
+//     console.log('Server Response: ', resp);
+// }).catch( err => {
+//     console.log('Something went wrong', err.message);
+// });
 
-    addToDom(todos, table);
-});
+const newItem = {
+    title: 'Evan',
+    details: 'a new object we get to mess with'
+}
 
-const addToDom = (list, container) => {
-    const tableRows = list.map((item, index) => {
+// axios.post(`${BASE_URL}/todos${API_KEY}`, newItem).then( resp => {
+//     console.log('Add Response', resp);
+// })
 
-        const tableData = [
-            $(`<td>${index + 1}</td>`),
-            $(`<td>${item.title}</td>`),
-            item.complete ? $(`<td class="text-success">Yes</td>`) : $(`<td class="text-danger">No</td>`)
-        ];
+const itemID = '5ac278e0329150131fbbff6a';
 
-        return $('<tr>').append(tableData);
-    });
+// http://api.reactprototypes.com/todos/IDGOESHERE?key=testuser1234
 
-    container.append(tableRows);
-};
+axios.get(`${BASE_URL}/todos/${itemID + API_KEY}`).then( resp => {
+    console.log('Server Response', resp);
+})
